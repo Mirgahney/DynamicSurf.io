@@ -3,38 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid.">
-  <meta name="keywords" content="Dynamic Surface Reconstruction, Surface Reconstruction, NeRF">
+        content="DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid. A model-free neural implicit surface reconstruction method for non-rigid surfaces from monocular RGB-D video.">
+  <meta name="keywords" content="DynamicSurf, Dynamic Surface Reconstruction, Non-Rigid Reconstruction, Neural Implicit Surfaces, RGB-D, Feature Grid">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid.</title>
+  <title>DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-PYVRSFMDRL');
-
-
-
   </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/index_dysurf.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -43,464 +34,390 @@
   <script src="./static/js/index.js"></script>
 </head>
 <body>
+<div class="wrapper">
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
-  <div class="navbar-menu">
+  <div class="navbar-menu" id="navbarMenu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
+      <a class="navbar-item" href="https://www.mirgahney.com/" target="_blank">
+        <span class="icon"><i class="fas fa-home"></i></span>
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-
-        </a>
+        <a class="navbar-link">More Research</a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="">
-          </a>
-          <a class="navbar-item" href="">
-
-          </a>
+          <a class="navbar-item" href="https://www.mirgahney.com/#papers" target="_blank">All Papers</a>
+          <a class="navbar-item" href="https://www.mirgahney.com/gnpm.io/" target="_blank">GNPM</a>
+          <a class="navbar-item" href="https://www.mirgahney.com/rfdm.io/" target="_blank">RDM</a>
         </div>
       </div>
     </div>
-
   </div>
 </nav>
 
-
+<!-- Hero / title -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid.</h1>
+          <h1 class="title is-1 publication-title">DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=KNXYC1EAAAAJ&hl=en">Mirgahney Mohamed</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="http://www0.cs.ucl.ac.uk/staff/L.Agapito/">Lourdes Agapito</a><sup>1</sup>,</span>
-            <!--
-            <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
+              <a href="https://scholar.google.com/citations?user=KNXYC1EAAAAJ&hl=en" target="_blank">Mirgahney Mohamed</a><sup>1</sup>,&nbsp;
             </span>
             <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
+              <a href="http://www0.cs.ucl.ac.uk/staff/L.Agapito/" target="_blank">Lourdes Agapito</a><sup>1</sup>
             </span>
-            <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
-            </span>
-            -->
           </div>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>University College London</span>
-            <!--
-            <span class="author-block"><sup>2</sup>Google Research</span>
-            -->
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">2024 International Conference on 3D Vision (3DV)</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
+              <!-- Paper -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2311.08159"
+                <a href="https://arxiv.org/abs/2311.08159" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
                   <span>Paper</span>
                 </a>
               </span>
-              <!--
+              <!-- arXiv -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
+                <a href="https://arxiv.org/abs/2311.08159" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
                   <span>arXiv</span>
                 </a>
               </span>
-              -->
-              <!-- Video Link. -->
-              <!--
+              <!-- Video -->
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
+                <a href="#qualitative-videos" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-youtube"></i></span>
+                  <span>Video (Coming Soon)</span>
                 </a>
               </span>
-              -->
-              <!-- Code Link. -->
+              <!-- Code -->
               <span class="link-block">
-                <a href="https://github.com/Mirgahney/dynsurf"
+                <a href="https://github.com/Mirgahney/dynsurf" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
+                  <span class="icon"><i class="fab fa-github"></i></span>
                   <span>Code</span>
-                  </a>
+                </a>
               </span>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!--
+
+<!-- Teaser figure -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video id="teaser" autoplay muted loop height="100%">
-        <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
+      <div class="figure-block">
+        <img src="./static/images/DynamicSurf/teaser.png" alt="DynamicSurf reconstruction results on a human and a plush-toy sequence from monocular RGB-D input">
+      </div>
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
+        <b>High-fidelity 4D surface reconstruction from a single RGB-D camera.</b>
+        DynamicSurf takes a monocular RGB-D sequence of a deforming object (left, per group) and recovers a
+        high-fidelity, time-consistent surface reconstruction (right, per group) &mdash; with no multi-view cues.
       </h2>
     </div>
   </div>
 </section>
 
+<section class="hero is-light is-small"></section>
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
-
+<!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We propose DynamicSurf, a model-free neural implicit surface reconstruction method for high-fidelity 3D modelling of non-rigid surfaces from monocular RGB-D video.
-            To cope with the lack of multi-view cues in monocular sequences of deforming surfaces, one of the most challenging settings for 3D reconstruction, DynamicSurf exploits depth, surface normals, and RGB losses to improve reconstruction fidelity and optimisation time.
-            DynamicSurf learns a neural deformation field that maps a canonical representation of the surface geometry to the current frame.
-            We depart from current neural non-rigid surface reconstruction models by designing the canonical representation as a learned feature grid which leads to faster and more accurate surface reconstruction than competing approaches that use a single MLP.
-            We demonstrate DynamicSurf on public datasets and show that it can optimize  sequences of varying frames with 6X speedup over pure MLP-based approaches while achieving comparable results to the state-of-the-art methods.
+            We propose DynamicSurf, a model-free neural implicit surface reconstruction method for high-fidelity 3D
+            modelling of non-rigid surfaces from monocular RGB-D video. To cope with the lack of multi-view cues in
+            monocular sequences of deforming surfaces, one of the most challenging settings for 3D reconstruction,
+            DynamicSurf exploits depth, surface normals, and RGB losses to improve reconstruction fidelity and
+            optimisation time. DynamicSurf learns a neural deformation field that maps a canonical representation of
+            the surface geometry to the current frame. We depart from current neural non-rigid surface
+            reconstruction models by designing the canonical representation as a learned feature grid which leads to
+            faster and more accurate surface reconstruction than competing approaches that use a single MLP. We
+            demonstrate DynamicSurf on public datasets and show that it can optimize sequences of varying frames
+            with 6&times; speedup over pure MLP-based approaches while achieving comparable results to the
+            state-of-the-art methods.
           </p>
-          <!--
-          <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
-          </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
-          </p>
-          -->
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
-
-    <!-- Paper video. -->
-    <!--
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    -->
-    <!--/ Paper video. -->
   </div>
 </section>
 
-
+<!-- Method -->
 <section class="section">
   <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-
-      <!-- Visual Effects. -->
-      <!--
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop height="100%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      -->
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <!--
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls height="100%">
-              <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    -->
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
-      <!--
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-      -->
-        <!-- Interpolating. -->
-      <!--
-        <h3 class="title is-4">Interpolating states</h3>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3">Method Overview</h2>
         <div class="content has-text-justified">
           <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
+            Given a monocular sequence of RGB-D frames and segmentation masks, DynamicSurf learns a
+            <b>deformation network</b> that maps observed points to a shared canonical space, and a
+            <b>topology-aware network</b> that additionally maps them into a learned hyper-space to handle
+            topological changes that a deformation field alone cannot capture (e.g. self-contact, clothing folds).
+            The deformation is parametrised as an <b>SE(3)</b> field &mdash; a rotation about a predicted anchor
+            point plus a displacement &mdash; conditioned on a learnable per-frame deformation code, rather than a
+            simple displacement field, which we found leads to overly smooth surfaces.
           </p>
-        </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="https://homes.cs.washington.edu/~kpar/nerfies/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="https://homes.cs.washington.edu/~kpar/nerfies/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
-        </div>
-        <br/>
-        -->
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-      <!--
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
           <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
+            Unlike prior neural non-rigid reconstruction methods, which represent the canonical geometry purely with
+            an MLP, DynamicSurf encodes it in a <b>dense, optimizable feature grid</b>, trilinearly interpolated and
+            decoded into signed-distance and colour values by shared, shallow MLPs. To keep grid-based optimisation
+            stable, the grid resolution is grown coarse-to-fine during training (35&sup3; to 140&sup3;). Training
+            supervises the SDF and rendered RGB-D directly against the input video with photometric, depth,
+            free-space, Eikonal and surface-smoothness losses &mdash; with no reliance on 2D correspondence
+            annotations, estimated normal maps, or optical flow as structural priors.
           </p>
         </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 width="75%">
-            <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="figure-block">
+          <img src="./static/images/DynamicSurf/architecture.png" alt="DynamicSurf architecture: deformation and topology networks map points to a canonical feature grid, decoded into SDF and RGB">
         </div>
-        -->
-        <!--/ Re-rendering. -->
-
+        <p class="figure-caption">
+          <b>Overall architecture of DynamicSurf.</b> Given a monocular sequence of RGB-D frames and segmentation
+          masks, we learn a deformation network to map points to canonical space and a topology network to model
+          topological changes. Points in canonical space are then queried via trilinear interpolation with our
+          feature grid. These features and the hyper-space features (output of the topology network) are
+          concatenated and decoded with shallow MLPs to predict signed distance values (SDF) of the surface and RGB
+          colors.
+        </p>
       </div>
     </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-  <!--
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-    -->
-    <!--/ Concurrent Work. -->
-
   </div>
 </section>
+
+<!-- Qualitative results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3">Qualitative Results</h2>
+
+        <div class="figure-block">
+          <img src="./static/images/DynamicSurf/short.png" alt="Comparison against NDR, OcclusionFusion, Bozic et al., DeepDeform and DynamicFusion on a short DeepDeform sequence">
+        </div>
+        <p class="figure-caption">
+          <b>Comparison against NDR, OcclusionFusion, Bozic <i>et al.</i>, DeepDeform and DynamicFusion on a short
+          sequence from the DeepDeform dataset.</b> DynamicSurf achieves comparable results to NDR and better
+          results than all the other baselines.
+        </p>
+
+        <div class="figure-block">
+          <img src="./static/images/DynamicSurf/frog.png" alt="Qualitative comparison with NDR on a frog toy sequence">
+        </div>
+        <p class="figure-caption">
+          <b>Qualitative comparison with NDR.</b> DynamicSurf is on par with NDR while enjoying a 6&times; speed
+          gain.
+        </p>
+
+        <div class="figure-block">
+          <img src="./static/images/DynamicSurf/alex_hat.png" alt="Qualitative comparison with NDR, OcclusionFusion, and DynamicFusion on two KillingFusion sequences">
+        </div>
+        <p class="figure-caption">
+          <b>Qualitative comparison with NDR, OcclusionFusion, and DynamicFusion on two sequences from the
+          KillingFusion dataset.</b> DynamicSurf achieves comparable results to the baselines while enjoying up to
+          6.7&times; speed gain.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Qualitative videos -->
+<section class="section" id="qualitative-videos">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Qualitative Video Results</h2>
+        <p>Rendered reconstruction sequences comparing DynamicSurf against DynamicFusion, DeepDeform, Bozic
+          <i>et al.</i>, OcclusionFusion and NDR.</p>
+      </div>
+    </div>
+
+    <!--
+      TODO: no source video for DynamicSurf could be located (checked this repo's git history/branches,
+      the thesis chapters, and the web) -- see notes/website_polish_prompt.md follow-up. Once a video is
+      available, replace this placeholder with a .video-gallery grid or a .publication-video iframe embed,
+      matching GNPM's Qualitative Video Results section.
+    -->
+    <div class="gallery-placeholder">
+      <span class="icon"><i class="fas fa-video"></i></span>
+      Video walkthrough coming soon.
+    </div>
+  </div>
+</section>
+
+<!-- Quantitative results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3">Quantitative Results</h2>
+        <p class="has-text-left" style="margin-bottom:0.5rem;">
+          <span class="legend-swatch cell-best"></span>best&nbsp;&nbsp;
+          <span class="legend-swatch cell-mid"></span>second best&nbsp;&nbsp;
+          <span class="legend-swatch cell-worst"></span>third best
+        </p>
+        <div class="table-scroll">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th class="method-name">Metric</th><th class="method-name">Method</th>
+                <th>DeepDeform&nbsp;Human &darr;</th>
+                <th>KillingFusion&nbsp;Alex &darr;</th>
+                <th>KillingFusion&nbsp;Hat &darr;</th>
+                <th>KillingFusion&nbsp;Frog &darr;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="section-row"><td colspan="6">Mean</td></tr>
+              <tr><td></td><td class="method-name">OcclusionFusion</td><td>&ndash;</td><td class="cell-best">3.75</td><td>6.77</td><td class="cell-worst">1.61</td></tr>
+              <tr><td></td><td class="method-name">NDR</td><td>&ndash;</td><td class="cell-mid">4.24</td><td class="cell-worst">4.93</td><td class="cell-best">1.34</td></tr>
+              <tr><td></td><td class="method-name">NDR*</td><td class="cell-mid">3.89</td><td class="cell-worst">5.69</td><td class="cell-mid">3.24</td><td>2.26</td></tr>
+              <tr class="ours"><td></td><td class="method-name">DynamicSurf (ours)</td><td class="cell-best">2.96</td><td>6.12</td><td class="cell-best">2.83</td><td class="cell-mid">1.39</td></tr>
+
+              <tr class="section-row"><td colspan="6">Median</td></tr>
+              <tr><td></td><td class="method-name">OcclusionFusion</td><td>&ndash;</td><td class="cell-best">3.41</td><td>6.47</td><td class="cell-worst">1.59</td></tr>
+              <tr><td></td><td class="method-name">NDR</td><td>&ndash;</td><td class="cell-mid">4.11</td><td class="cell-worst">4.66</td><td class="cell-mid">1.33</td></tr>
+              <tr><td></td><td class="method-name">NDR*</td><td class="cell-mid">3.8</td><td class="cell-worst">4.69</td><td class="cell-mid">3.26</td><td>2.25</td></tr>
+              <tr class="ours"><td></td><td class="method-name">DynamicSurf (ours)</td><td class="cell-best">2.89</td><td>5.21</td><td class="cell-best">2.75</td><td class="cell-best">1.27</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="figure-caption">
+          <b>Quantitative results on 4 sequences.</b> Geometric error is the average per-point per-frame 3D error
+          between the reconstructed shape and the point cloud backprojected from GT depth inside the mask (lower is
+          better). NDR denotes results reported in their paper, while NDR* denotes results obtained by training on
+          NDR's public code release and settings. The DeepDeform Human column has only two reported methods, so no
+          third-best entry is coloured there.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Computational efficiency -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3">Computational Efficiency</h2>
+        <div class="content has-text-justified">
+          <p>
+            By representing canonical geometry with an optimizable feature grid instead of relying solely on an MLP,
+            DynamicSurf reaches comparable reconstruction quality to the state-of-the-art while training
+            substantially faster.
+          </p>
+        </div>
+        <div class="table-scroll">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th class="method-name">Method</th>
+                <th>KillingFusion Alex</th><th>KillingFusion Hat</th><th>KillingFusion Frog</th>
+                <th>DeepDeform Human</th><th>DeepDeform Dog</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="method-name">NDR</td><td>1&times;</td><td>1&times;</td><td>1&times;</td><td>1&times;</td><td>1&times;</td></tr>
+              <tr class="ours"><td class="method-name">DynamicSurf (ours)</td><td class="cell-best">5.8&times;</td><td class="cell-best">6.7&times;</td><td class="cell-best">6.2&times;</td><td class="cell-best">5.1&times;</td><td class="cell-best">5&times;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="figure-caption">
+          <b>Optimization time speedup relative to NDR, on 5 sequences.</b> DynamicSurf achieves a
+          (5&ndash;6.7)&times; speedup over NDR. We could not evaluate training speed against OcclusionFusion, as
+          its code isn't publicly available and its authors did not respond to our emails.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ablation -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3">Ablation Studies</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Deformation network.</b> We compare our SE(3)-based deformation network against a pure MLP-based
+            displacement field and against NDR's Bijective map, keeping layer/neuron counts matched across all
+            three. The SE(3) network yields better results than the MLP-based method, especially in capturing face
+            details, while the Bijective map gives comparable reconstruction quality but suffers from surface
+            artefacts &mdash; so we chose SE(3) for its lower computational complexity and smoother surfaces.
+          </p>
+          <p>
+            <b>Topology network.</b> Removing the topology-aware network (so decoders take input only from the
+            feature grid, with feature dimensions increased to match for a fair comparison) reduces DynamicSurf's
+            ability to capture fine surface detail, especially under difficult deformations.
+          </p>
+          <p>
+            <b>Smoothness loss.</b> Increasing the standard deviation of the surface-smoothness loss trades off
+            surface detail for smoothness &mdash; as the value increases, fine details on the surface start to
+            disappear.
+          </p>
+        </div>
+        <div class="figure-block">
+          <img src="./static/images/DynamicSurf/ablation.png" alt="Ablation on smoothness loss standard deviation and on the deformation/topology network architecture">
+        </div>
+        <p class="figure-caption">
+          <b>Ablation on smoothness loss and model architecture.</b> Left: the effect of standard deviation
+          &delta;<sub>std</sub> on surface smoothness. Right: the importance of the deformation and topology
+          networks in recovering surface details and capturing motion.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>
-    @inproceedings{mohamed2024dynamicsurf,
-      title={DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid},
-      author={Mohamed, Mirgahney and Agapito, Lourdes},
-      booktitle={2024 International Conference on 3D Vision (3DV)},
-      year={2024},
-      organization={IEEE}
-    }
-    </code></pre>
+    <pre><code>@inproceedings{mohamed2024dynamicsurf,
+  title={DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid},
+  author={Mohamed, Mirgahney and Agapito, Lourdes},
+  booktitle={2024 International Conference on 3D Vision (3DV)},
+  year={2024},
+  organization={IEEE}
+}</code></pre>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="https://homes.cs.washington.edu/~kpar/nerfies/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
-      </div>
-    </div>
+<section class="section" id="Acknowledgement">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgement</h2>
+    <p>We referred to the project page of <a href="https://nerfies.github.io/" target="_blank">Nerfies</a> when creating this project page.</p>
   </div>
-</footer>
+</section>
 
+</div>
 </body>
 </html>
